@@ -1,0 +1,2 @@
+TURNO_DADO = '✅'
+TURNO_DISPONIBLE = '⬜'
