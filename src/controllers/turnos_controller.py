@@ -1,9 +1,8 @@
 # Definición de funciones
 from typing import Optional
-from data import turnos_db
-from constantes import TURNO_DADO, TURNO_DISPONIBLE
 
-
+from src.data import turnos_db
+from src.config.constants import TURNO_DADO, TURNO_DISPONIBLE
 
 def añadir_turno():
     nombre = input('Nombre del Paciente: ')
@@ -94,7 +93,7 @@ def __check_if_turnos():
 
 def __find_turno() -> Optional[dict]:
     ver_turno()
-    option = int(input(f'Elije un Turno [1-{len(turnos_db)}]'))
+    option = int(input(f'Elije un Turno [1-{len(turnos_db)}] '))
     for index, turno in enumerate(turnos_db, start=1):
         if option == index:
             return turno
