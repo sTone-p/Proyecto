@@ -5,7 +5,7 @@ from termcolor import cprint, colored
 from src.controllers import turnos
 from src.helpers.consola_helper import limpiar_consola
 from src.helpers.turno_helpers import menu_turnos
-from src.helpers import consola_helper
+
 
 def run():
     limpiar_consola
@@ -25,7 +25,7 @@ def run():
             case '5':
                 turnos.cancelar_turno()
             case '0': 
-                cprint('Saliendo...', 'red', attrs=['bold'])
+                cprint('Salir', 'red', attrs=['bold'])
                 break
             case _:
                 cprint('Opción Inválida.', 'red', attrs=['bold'])

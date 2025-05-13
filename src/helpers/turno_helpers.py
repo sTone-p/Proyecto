@@ -17,5 +17,6 @@ def menu_turnos():
 
 
 def save_turnos() -> None:
-    write_json_file(TURNOS_JSON_FILE, turnos_db)
+    lista_turnos: list[dict] = [turno.to_json() for turno in turnos_db]
+    write_json_file(TURNOS_JSON_FILE, lista_turnos)
 

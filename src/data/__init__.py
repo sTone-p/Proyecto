@@ -1,3 +1,7 @@
-from .db import initialize_data
+from typing import List
 
-turnos_db: list[dict] = initialize_data()
+from .db import initialize_data
+from .modelos.turno_model import Cirugía
+
+
+turnos_db: List[Cirugía] = initialize_data()
