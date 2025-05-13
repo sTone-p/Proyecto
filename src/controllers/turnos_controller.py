@@ -1,22 +1,27 @@
 # Definición de funciones
 from typing import Optional
 
+from termcolor import cprint
+
 from src.data import turnos_db
 from src.config.constants import TURNO_DADO, TURNO_DISPONIBLE
+from src.helpers.consola_helper import get_string
+from src.helpers.turno_helpers import save_turnos
+
 
 def añadir_turno():
-    nombre = input('Nombre del Paciente: ')
+    nombre = get_string('Nombre del Paciente: ', accept_blank=False, only_letters=True)
     while True:
         edad = input('Edad del paciente: ')
         if edad.isnumeric():
             edad = int(edad)
             break
-        print("Por favor, ingresa una edad válida (número entero).")
+        cprint('Por favor, ingresa una edad válida (número entero).', 'red')
     while True:
         dni = input('D.N.I (Sin puntos ni letras): ')
         if dni.isnumeric():
             break
-        print("Por favor, ingresa un D.N.I válido (solo números).")
+        cprint('Por favor, ingresa un D.N.I válido (solo números).', 'red')
     obra_social = input('¿Obra Social? S/N: ')
     consulta = input('Razón de la consulta: ')
     turno = {
@@ -25,10 +30,11 @@ def añadir_turno():
         'dni': dni,
         'obra_social': obra_social,
         'consulta': consulta,
-        'dado': False,
+        'dado': True,
     }
     turnos_db.append(turno)
-    print('Turno añadido exitosamente')
+    save_turnos()
+    cprint('Turno añadido exitosamente', 'green')
 
 
 def ver_turno():
@@ -65,7 +71,7 @@ def editar_turno():
         turno['dado'] = True
     elif dado.lower() in ['false', '0', 'no']:
         turno['dado'] = False
-
+    save_turnos()
     print("✅ Turno editado correctamente.")
 
 def info_de_turno():
@@ -83,7 +89,8 @@ def cancelar_turno():
     ver_turno()
     option = int(input(f'Elije un Turno para cancelar [1-{len(turnos_db)}]'))
     turnos_db.pop(option - 1)
-    print('Turno eliminado.')
+    save_turnos()
+    cprint('Turno eliminado.', 'red')
 
 def __check_if_turnos():
     if not turnos_db:

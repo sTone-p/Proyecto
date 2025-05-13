@@ -3,7 +3,8 @@
 from termcolor import cprint, colored
 
 from src.controllers import turnos
-from src.helpers.consola_helper import limpiar_consola, menu_turnos
+from src.helpers.consola_helper import limpiar_consola
+from src.helpers.turno_helpers import menu_turnos
 from src.helpers import consola_helper
 
 def run():
