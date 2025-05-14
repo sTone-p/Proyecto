@@ -6,7 +6,7 @@ from src.data import turnos_db
 from src.config.constants import TURNO_DADO, TURNO_DISPONIBLE
 from src.helpers.consola_helper import get_string
 from src.helpers.turno_helpers import save_turnos
-from src.data.modelos.turno_model import Cirugía
+from src.data.modelos.turno_model import TurnoModel
 
 class TurnoController():
 
@@ -26,7 +26,7 @@ class TurnoController():
             cprint('Por favor, ingresa un D.N.I válido (solo números).', 'red')
         obra_social = input('¿Obra Social? S/N: ')
         consulta = input('Razón de la consulta: ')
-        turno = Cirugía(
+        turno = TurnoModel(
             nombre=nombre,
             edad=edad,
             dni=dni,
@@ -69,7 +69,7 @@ class TurnoController():
             turno.obra_social = new_obra_social
         if new_consulta:
             turno.consulta = new_consulta
-        if dado.lower() in ['true', '1', 'sí', 'si']:
+        if dado.lower() in ['true', '1', 'sí', 'si', 'confirmado', 'confirma']:
             turno.dado = True
         elif dado.lower() in ['false', '0', 'no']:
             turno.dado = False
@@ -104,7 +104,7 @@ class TurnoController():
         return True
 
 
-    def __find_turno(self) -> Optional[Cirugía]:
+    def __find_turno(self) -> Optional[TurnoModel]:
         self.ver_turno()
         option = int(input(f'Elije un Turno [1-{len(turnos_db)}] '))
         for index, turno in enumerate(turnos_db, start=1):
