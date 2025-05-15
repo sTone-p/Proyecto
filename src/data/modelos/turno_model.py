@@ -7,8 +7,16 @@ class TurnoModel(Hospital):
         self.obra_social: str = obra_social
         self.dado: bool = dado
     
-    def to_json(self):
-        return self.__dict__
+    def to_json(self) -> dict:
+        return {
+            "nombre": self._nombre,
+            "edad": self._edad, 
+            "consulta": self._consulta,
+            "dni": self.dni,
+            "obra social": self.obra_social,
+            "dado": self.dado
+
+        }
     
     def __str__(self):
         return (
